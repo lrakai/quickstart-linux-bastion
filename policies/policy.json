@@ -1,0 +1,95 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:Accept*",
+                "ec2:Activate*",
+                "ec2:Allocate*",
+                "ec2:Assign*",
+                "ec2:Associate*",
+                "ec2:Attach*",
+                "ec2:Authorize*",
+                "ec2:Bundle*",
+                "ec2:Cancel*",
+                "ec2:Copy*",
+                "ec2:Create*",
+                "ec2:Cancel*",
+                "ec2:Delete*",
+                "ec2:Describe*",
+                "ec2:Detach*",
+                "ec2:Disable*",
+                "ec2:Disassoc**",
+                "ec2:Enable*",
+                "ec2:Get*",
+                "ec2:Import*",
+                "ec2:Monitor*",
+                "ec2:*Register*",
+                "ec2:Reject*",
+                "ec2:Release*",
+                "ec2:Replace*",
+                "ec2:Reset*",
+                "ec2:Revoke*",
+                "ec2:Terminate*",
+                "ec2:Un*",
+                "ec2:ModifyVpcAttribute",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:ModifyNetworkInterfaceAttribute"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "ec2:Region": "us-west-2"
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:RunInstances"
+            ],
+            "Resource": [
+                "arn:aws:ec2:us-west-2:*:instance/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "ec2:InstanceType": [
+                        "t2.micro"
+                    ]
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:RunInstances"
+            ],
+            "Resource": [
+                "arn:aws:ec2:us-west-2::image/*",
+                "arn:aws:ec2:us-west-2::snapshot/*",
+                "arn:aws:ec2:us-west-2:*:key-pair/*",
+                "arn:aws:ec2:us-west-2:*:security-group/*",
+                "arn:aws:ec2:us-west-2:*:subnet/*",
+                "arn:aws:ec2:us-west-2:*:network-interface/*",
+                "arn:aws:ec2:us-west-2:*:volume/*",
+                "arn:aws:ec2:us-west-2:*:placement-group/*",
+                "arn:aws:ec2:us-west-2:*:vpc/*"
+            ]
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "ec2:*Host*",
+                "ec2:*Reserved*",
+                "ec2:*Spot*",
+                "dynamodb:*Reserved*",
+                "rds:*Reserved*",
+                "elasticache:*Reserved*",
+                "redshift:*Reserved*",
+                "aws-marketplace:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
