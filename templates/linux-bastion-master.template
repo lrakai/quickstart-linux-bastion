@@ -24,7 +24,7 @@
                         "default": "Amazon EC2 Configuration"
                     },
                     "Parameters": [
-                        "KeyPairName",
+                        "KeyName",
                         "BastionAMIOS",
                         "BastionInstanceType"
                     ]
@@ -77,7 +77,7 @@
                 "EnableX11Forwarding": {
                     "default": "Enable X11 Forwarding"
                 },
-                "KeyPairName": {
+                "KeyName": {
                     "default": "Key Pair Name"
                 },
                 "NumBastionHosts": {
@@ -189,9 +189,10 @@
                 "false"
             ]
         },
-        "KeyPairName": {
+        "KeyName": {
             "Description": "Public/private key pairs allow you to securely connect to your instance after it launches",
-            "Type": "AWS::EC2::KeyPair::KeyName"
+            "Type": "String",
+            "Default": "{KeyName}"
         },
         "NumBastionHosts": {
             "AllowedValues": [
@@ -258,6 +259,7 @@
         "RemoteAccessCIDR": {
             "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
             "ConstraintDescription": "CIDR block parameter must be in the form x.x.x.x/x",
+            "Default": "0.0.0.0/0",
             "Description": "Allowed CIDR block for external SSH access to the bastions",
             "Type": "String"
         },
@@ -307,7 +309,7 @@
                         ]
                     },
                     "KeyPairName": {
-                        "Ref": "KeyPairName"
+                        "Ref": "KeyName"
                     },
                     "NumberOfAZs": "2",
                     "PrivateSubnet1ACIDR": {
@@ -371,8 +373,8 @@
                     "EnableX11Forwarding": {
                         "Ref": "EnableX11Forwarding"
                     },
-                    "KeyPairName": {
-                        "Ref": "KeyPairName"
+                    "KeyName": {
+                        "Ref": "KeyName"
                     },
                     "NumBastionHosts": {
                         "Ref": "NumBastionHosts"
