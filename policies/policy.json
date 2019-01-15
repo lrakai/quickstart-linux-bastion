@@ -77,6 +77,93 @@
                 "arn:aws:ec2:us-west-2:*:vpc/*"
             ]
         },
+		{
+			"Effect": "Allow",
+			"Action": [
+				"cloudformation:Describe*",
+				"cloudformation:List*",
+				"cloudformation:ValidateTemplate",
+				"cloudformation:Get*"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"cloudwatch:Describe*",
+				"cloudwatch:Get*",
+				"cloudwatch:Put*",
+				"cloudwatch:DeleteAlarms",
+				"cloudwatch:DisableAlarmActions",
+				"cloudwatch:EnableAlarmActions",
+				"cloudwatch:ListMetrics",
+				"cloudwatch:SetAlarmState"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"elasticbeanstalk:Create*",
+				"elasticbeanstalk:Delete*",
+				"elasticbeanstalk:Describe*",
+				"elasticbeanstalk:List*",
+				"elasticbeanstalk:Update*",
+				"elasticbeanstalk:AbortEnvironmentUpdate",
+				"elasticbeanstalk:ApplyEnvironmentManagedAction",
+				"elasticbeanstalk:CheckDNSAvailability",
+				"elasticbeanstalk:ComposeEnvironments",
+				"elasticbeanstalk:RebuildEnvironment",
+				"elasticbeanstalk:RequestEnvironmentInfo",
+				"elasticbeanstalk:RestartAppServer",
+				"elasticbeanstalk:RetrieveEnvironmentInfo",
+				"elasticbeanstalk:SwapEnvironmentCNAMEs",
+				"elasticbeanstalk:TerminateEnvironment",
+				"elasticbeanstalk:ValidateConfigurationSettings",
+				"elasticloadbalancing:Add*",
+				"elasticloadbalancing:Create*",
+				"elasticloadbalancing:Delete*",
+				"elasticloadbalancing:Describe*",
+				"elasticloadbalancing:Modify*",
+				"elasticloadbalancing:Register*",
+				"elasticloadbalancing:Remove*",
+				"elasticloadbalancing:Set*",
+				"elasticloadbalancing:ApplySecurityGroupsToLoadBalancer",
+				"elasticloadbalancing:AttachLoadBalancerToSubnets",
+				"elasticloadbalancing:ConfigureHealthCheck",
+				"elasticloadbalancing:Deregister*",
+				"elasticloadbalancing:DetachLoadBalancerFromSubnets",
+				"elasticloadbalancing:*AvailabilityZonesForLoadBalancer"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"kms:Get*",
+				"kms:ListResourceTags",
+				"kms:ListKeys",
+				"kms:ListRetirableGrants",
+				"kms:ListAliases"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"s3:Delete*",
+				"s3:Get*",
+				"s3:List*",
+				"s3:Put*",
+				"s3:Replicate*",
+				"s3:AbortMultipartUpload",
+				"s3:CreateBucket",
+				"s3:HeadBucket",
+				"s3:ObjectOwnerOverrideToBucketOwner",
+				"s3:RestoreObject"
+			],
+			"Resource": "*"
+		},
         {
             "Effect": "Deny",
             "Action": [
@@ -90,6 +177,16 @@
                 "aws-marketplace:*"
             ],
             "Resource": "*"
-        }
+        },
+		{
+			"Effect": "Deny",
+			"Action": [
+				"iam:*"
+			],
+			"Resource": [
+				"arn:aws:iam::*:user/student",
+				"arn:aws:iam::*:group/CloudAcademyStudents"
+			]
+		}
     ]
 }
