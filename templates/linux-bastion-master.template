@@ -24,7 +24,7 @@
                         "default": "Amazon EC2 Configuration"
                     },
                     "Parameters": [
-                        "KeyName",
+                        "KeyPairName",
                         "BastionAMIOS",
                         "BastionInstanceType"
                     ]
@@ -77,7 +77,7 @@
                 "EnableX11Forwarding": {
                     "default": "Enable X11 Forwarding"
                 },
-                "KeyName": {
+                "KeyPairName": {
                     "default": "Key Pair Name"
                 },
                 "NumBastionHosts": {
@@ -116,7 +116,8 @@
     "Parameters": {
         "AvailabilityZones": {
             "Description": "List of Availability Zones to use for the subnets in the VPC. Note: The logical order is preserved and only 2 AZs are used for this deployment.",
-            "Type": "List<AWS::EC2::AvailabilityZone::Name>"
+            "Type": "List<AWS::EC2::AvailabilityZone::Name>",
+            "Default": "us-west-2a,us-west-2b"
         },
         "BastionAMIOS": {
             "AllowedValues": [
@@ -189,9 +190,9 @@
                 "false"
             ]
         },
-        "KeyName": {
+        "KeyPairName": {
             "Description": "Public/private key pairs allow you to securely connect to your instance after it launches",
-            "Type": "String",
+            "Type": "AWS::EC2::KeyPair::KeyName",
             "Default": "{KeyName}"
         },
         "NumBastionHosts": {
@@ -309,7 +310,7 @@
                         ]
                     },
                     "KeyPairName": {
-                        "Ref": "KeyName"
+                        "Ref": "KeyPairName"
                     },
                     "NumberOfAZs": "2",
                     "PrivateSubnet1ACIDR": {
@@ -373,8 +374,8 @@
                     "EnableX11Forwarding": {
                         "Ref": "EnableX11Forwarding"
                     },
-                    "KeyName": {
-                        "Ref": "KeyName"
+                    "KeyPairName": {
+                        "Ref": "KeyPairName"
                     },
                     "NumBastionHosts": {
                         "Ref": "NumBastionHosts"
