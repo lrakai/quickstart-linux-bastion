@@ -119,6 +119,34 @@
             "Type": "List<AWS::EC2::AvailabilityZone::Name>",
             "Default": "us-west-2a,us-west-2b"
         },
+        "BackendTenancy": {
+            "Description":"VPC Tenancy to launch the backend in. Options: 'dedicated' or 'default'",
+            "Type":"String",
+            "Default":"default",
+            "AllowedValues":[
+                "dedicated",
+                "default"
+            ]
+        },
+        "BackendInstanceType": {
+            "Description": "Amazon EC2 instance type for the backend instances",
+            "Type": "String",
+            "Default": "t2.micro",
+            "AllowedValues": [
+                "t2.nano",
+                "t2.micro",
+                "t2.small",
+                "t2.medium",
+                "t2.large",
+                "m3.large",
+                "m3.xlarge",
+                "m3.2xlarge",
+                "m4.large",
+                "m4.xlarge",
+                "m4.2xlarge",
+                "m4.4xlarge"
+            ]
+        },
         "BastionAMIOS": {
             "AllowedValues": [
                 "Amazon-Linux-HVM",
@@ -194,6 +222,17 @@
             "Description": "Public/private key pairs allow you to securely connect to your instance after it launches",
             "Type": "AWS::EC2::KeyPair::KeyName",
             "Default": "{KeyName}"
+        },
+        "NumBackendHosts": {
+            "AllowedValues": [
+                "1",
+                "2",
+                "3",
+                "4"
+            ],
+            "Default": "2",
+            "Description": "Enter the number of backend hosts to create",
+            "Type": "String"
         },
         "NumBastionHosts": {
             "AllowedValues": [
@@ -390,6 +429,67 @@
                         "Fn::GetAtt": [
                             "VPCStack",
                             "Outputs.PublicSubnet2ID"
+                        ]
+                    },
+                    "QSS3BucketName": {
+                        "Ref": "QSS3BucketName"
+                    },
+                    "QSS3KeyPrefix": {
+                        "Ref": "QSS3KeyPrefix"
+                    },
+                    "RemoteAccessCIDR": {
+                        "Ref": "RemoteAccessCIDR"
+                    },
+                    "VPCID": {
+                        "Fn::GetAtt": [
+                            "VPCStack",
+                            "Outputs.VPCID"
+                        ]
+                    }
+                }
+            }
+        },
+        "BackendStack": {
+            "DependsOn": "VPCStack",
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": {
+                    "Fn::Sub": [
+                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/linux-backend.template",
+                        {
+                            "QSS3Region": {
+                                "Fn::If": [
+                                    "GovCloudCondition",
+                                    "s3-us-gov-west-1",
+                                    "s3"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "Parameters": {
+                    "BackendInstanceType": {
+                        "Ref": "BackendInstanceType"
+                    },
+                    "BackendTenancy": {
+                      "Ref": "BackendTenancy"
+                    },
+                    "KeyPairName": {
+                        "Ref": "KeyPairName"
+                    },
+                    "NumBackendHosts": {
+                        "Ref": "NumBackendHosts"
+                    },
+                    "PrivateSubnet1ID": {
+                        "Fn::GetAtt": [
+                            "VPCStack",
+                            "Outputs.PrivateSubnet1BID"
+                        ]
+                    },
+                    "PrviateSubnet2ID": {
+                        "Fn::GetAtt": [
+                            "VPCStack",
+                            "Outputs.PrivateSubnet2BID"
                         ]
                     },
                     "QSS3BucketName": {
