@@ -664,7 +664,7 @@
                 "Tags": [
                     {
                         "Key": "Name",
-                        "Value": "LinuxBastion",
+                        "Value": "Bastion (Linux)",
                         "PropagateAtLaunch": "true"
                     }
                 ]
