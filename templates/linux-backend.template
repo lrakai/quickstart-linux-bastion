@@ -122,11 +122,11 @@
             "Type": "String"
         },
         "PrivateSubnet1ID": {
-            "Description": "ID of the public subnet 1 that you want to provision the first backend instance into (e.g., subnet-a0246dcd)",
+            "Description": "ID of the private subnet 1 that you want to provision the first backend instance into (e.g., subnet-a0246dcd)",
             "Type": "AWS::EC2::Subnet::Id"
         },
         "PrivateSubnet2ID": {
-            "Description": "ID of the public subnet 2 you want to provision the second backend instance into (e.g., subnet-e3246d8e)",
+            "Description": "ID of the private subnet 2 you want to provision the second backend instance into (e.g., subnet-e3246d8e)",
             "Type": "AWS::EC2::Subnet::Id"
         },
         "QSS3BucketName": {

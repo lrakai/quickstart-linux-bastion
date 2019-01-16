@@ -159,7 +159,7 @@
             "Type": "String"
         },
         "BastionBanner": {
-            "Default": "https://aws-quickstart.s3.amazonaws.com/quickstart-linux-bastion/scripts/banner_message.txt",
+            "Default": "https://clouda-labs-assets.s3.amazonaws.com/quickstart-linux-bastion/scripts/banner_message.txt",
             "Description": "Banner text to display upon login",
             "Type": "String"
         },
@@ -327,7 +327,7 @@
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": [
-                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}/templates/aws-vpc.template",
+                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/aws-vpc.template",
                         {
                             "QSS3Region": {
                                 "Fn::If": [
@@ -486,7 +486,7 @@
                             "Outputs.PrivateSubnet1BID"
                         ]
                     },
-                    "PrviateSubnet2ID": {
+                    "PrivateSubnet2ID": {
                         "Fn::GetAtt": [
                             "VPCStack",
                             "Outputs.PrivateSubnet2BID"
