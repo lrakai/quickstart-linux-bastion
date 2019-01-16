@@ -406,15 +406,10 @@ verify_dependencies
 # Assuming it is, setup environment variables.
 setup_environment_variables
 
-## set an initial value
-SSH_BANNER="LINUX BASTION"
-
 # Read the options from cli input
-TEMP=`getopt -o h:  --long help,banner:,enable:,tcp-forwarding:,x11-forwarding: -n $0 -- "$@"`
+TEMP=`getopt -o h:  --long help -n $0 -- "$@"`
 eval set -- "${TEMP}"
 
-
-if [ $# == 1 ] ; then echo "No input provided! type ($0 --help) to see usage help" >&2 ; exit 1 ; fi
 
 # extract options and their arguments into variables.
 while true; do
@@ -422,22 +417,6 @@ while true; do
         -h | --help)
             usage
             exit 1
-            ;;
-        --banner)
-            BANNER_PATH="$2";
-            shift 2
-            ;;
-        --enable)
-            ENABLE="$2";
-            shift 2
-            ;;
-        --tcp-forwarding)
-            TCP_FORWARDING="$2";
-            shift 2
-            ;;
-        --x11-forwarding)
-            X11_FORWARDING="$2";
-            shift 2
             ;;
         --)
             break
@@ -447,28 +426,6 @@ while true; do
             ;;
     esac
 done
-
-# BANNER CONFIGURATION
-BANNER_FILE="/etc/ssh_banner"
-if [[ ${ENABLE} == "true" ]];then
-    if [ -z ${BANNER_PATH} ];then
-        echo "BANNER_PATH is null skipping ..."
-    else
-        echo "BANNER_PATH = ${BANNER_PATH}"
-        echo "Creating Banner in ${BANNER_FILE}"
-        echo "curl  -s ${BANNER_PATH} > ${BANNER_FILE}"
-        curl  -s ${BANNER_PATH} > ${BANNER_FILE}
-        if [ ${BANNER_FILE} ] ;then
-            echo "[INFO] Installing banner ... "
-            echo -e "\n Banner ${BANNER_FILE}" >>/etc/ssh/sshd_config
-        else
-            echo "[INFO] banner file is not accessible skipping ..."
-            exit 1;
-        fi
-    fi
-else
-    echo "Banner message is not enabled!"
-fi
 
 release=$(osrelease)
 # Ubuntu Linux
