@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "This template creates a VPC infrastructure for a multi-AZ, multi-tier deployment of a Linux based Application infrastructure. It will deploy a bastion and managed NAT gateways or NAT instances into the public subnet for each Availability Zone.",
+    "Description": "This template creates a VPC infrastructure for a multi-AZ, multi-tier deployment of a Linux based application infrastructure. It will deploy a bastion and managed NAT gateways into the public subnet for each Availability Zone. Backend application instances are also deployed.",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
@@ -498,8 +498,11 @@
                     "QSS3KeyPrefix": {
                         "Ref": "QSS3KeyPrefix"
                     },
-                    "RemoteAccessCIDR": {
-                        "Ref": "RemoteAccessCIDR"
+                    "BastionSecurityGroup": {
+                        "Fn::GetAtt": [
+                            "BastionStack",
+                            "Outputs.BastionSecurityGroupID"
+                        ]
                     },
                     "VPCID": {
                         "Fn::GetAtt": [
