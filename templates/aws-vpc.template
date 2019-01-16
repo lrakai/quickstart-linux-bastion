@@ -2516,7 +2516,7 @@
                 "NetworkAclId": {
                     "Ref": "PrivateSubnet1BNetworkAcl"
                 },
-                "Protocol": -1,
+                "Protocol": 1,
                 "RuleAction": "allow",
                 "RuleNumber": 100
             }
@@ -2619,7 +2619,7 @@
                 "NetworkAclId": {
                     "Ref": "PrivateSubnet2BNetworkAcl"
                 },
-                "Protocol": -1,
+                "Protocol": 1,
                 "RuleAction": "allow",
                 "RuleNumber": 100
             }
