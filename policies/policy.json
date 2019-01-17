@@ -133,7 +133,8 @@
 				"elasticloadbalancing:ConfigureHealthCheck",
 				"elasticloadbalancing:Deregister*",
 				"elasticloadbalancing:DetachLoadBalancerFromSubnets",
-				"elasticloadbalancing:*AvailabilityZonesForLoadBalancer"
+				"elasticloadbalancing:*AvailabilityZonesForLoadBalancer",
+				"autoscaling:Describe*"
 			],
 			"Resource": "*"
 		},
