@@ -2484,7 +2484,7 @@
                 "Tags": [
                     {
                         "Key": "Name",
-                        "Value": "NACL Protected subnet 1"
+                        "Value": "NACL Protected subnets"
                     },
                     {
                         "Key": "Network",
@@ -2577,53 +2577,6 @@
                 }
             }
         },
-        "PrivateSubnet2BNetworkAcl": {
-            "Condition": "AdditionalPrivateSubnetsCondition",
-            "Type": "AWS::EC2::NetworkAcl",
-            "Properties": {
-                "VpcId": {
-                    "Ref": "VPC"
-                },
-                "Tags": [
-                    {
-                        "Key": "Name",
-                        "Value": "NACL Protected subnet 2"
-                    },
-                    {
-                        "Key": "Network",
-                        "Value": "NACL Protected"
-                    }
-                ]
-            }
-        },
-        "PrivateSubnet2BNetworkAclEntryInbound": {
-            "Condition": "AdditionalPrivateSubnetsCondition",
-            "Type": "AWS::EC2::NetworkAclEntry",
-            "Properties": {
-                "CidrBlock": "0.0.0.0/0",
-                "Egress": false,
-                "NetworkAclId": {
-                    "Ref": "PrivateSubnet2BNetworkAcl"
-                },
-                "Protocol": -1,
-                "RuleAction": "allow",
-                "RuleNumber": 100
-            }
-        },
-        "PrivateSubnet2BNetworkAclEntryOutbound": {
-            "Condition": "AdditionalPrivateSubnetsCondition",
-            "Type": "AWS::EC2::NetworkAclEntry",
-            "Properties": {
-                "CidrBlock": "0.0.0.0/0",
-                "Egress": true,
-                "NetworkAclId": {
-                    "Ref": "PrivateSubnet2BNetworkAcl"
-                },
-                "Protocol": 1,
-                "RuleAction": "allow",
-                "RuleNumber": 100
-            }
-        },
         "PrivateSubnet2BNetworkAclAssociation": {
             "Condition": "AdditionalPrivateSubnetsCondition",
             "Type": "AWS::EC2::SubnetNetworkAclAssociation",
@@ -2632,7 +2585,7 @@
                     "Ref": "PrivateSubnet2B"
                 },
                 "NetworkAclId": {
-                    "Ref": "PrivateSubnet2BNetworkAcl"
+                    "Ref": "PrivateSubnet1BNetworkAcl"
                 }
             }
         },
