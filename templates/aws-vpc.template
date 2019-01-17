@@ -2517,6 +2517,10 @@
                     "Ref": "PrivateSubnet1BNetworkAcl"
                 },
                 "Protocol": 1,
+                "Icmp": {
+                    "Code" : -1,
+                    "Type" : -1
+                 },
                 "RuleAction": "allow",
                 "RuleNumber": 100
             }
