@@ -2516,10 +2516,10 @@
                 "NetworkAclId": {
                     "Ref": "PrivateSubnet1BNetworkAcl"
                 },
-                "Protocol": 1,
-                "Icmp": {
-                    "Code" : -1,
-                    "Type" : -1
+                "Protocol": 6,
+                "PortRange": {
+                    "From" : 80,
+                    "To" : 80
                  },
                 "RuleAction": "allow",
                 "RuleNumber": 100
